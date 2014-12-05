@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+
+	var str = 'abc,cac,dd,ss';
+
+	var arr = str.split(',');
+
+	//alert(arr.length);
+
+	//只替换第一个
+	//var str1 = str.replace('a','-');
+
+	//替换全局
+	var str1 = str.replace(/a/g,'-');
+	//alert(str1);
+
+	//字符串截取
+	var str2 = str.slice(1,str.length);
+	var str2_1 = str.slice(-3);
+
+	console.log(str2_1);
+
+
+	//var str2_2 = str.substring(0,1);
+	var str2_2 = str.substring(-3);
+	console.log(str2_2);
+
+	console.log('---------------');
+	var str2_3 = str.substr(5);
+	console.log(str2_3);
+	console.log('---------------');
+
+	//alert(str2);
+
+	//字符串去掉首位空格
+	var str3 = '  sdfsd   ';
+	var reg = /^\s+|\s+$/g;
+
+	var str4 = str3.replace(reg,'') ;
+
+	console.log("\'"+str4+"\'");
+
+
+	var str5 = str.toUpperCase();
+
+	console.log(str5);
+
+
+	var arr2 = str.split(',');
+	
+	for(var i=0,len=arr2.length;i<len;i++){
+
+		var reg=/^\w/;
+
+		arr2[i] = arr2[i].replace(reg,'-');
+
+
+	}
+
+	console.log(arr2.join(','));
+
+
+
+
+
+
+	</script>
+
+
+</body>
+</html>

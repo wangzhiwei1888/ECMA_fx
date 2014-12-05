@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+//bind方法会创建一个新函数,称为绑定函数.当调用这个绑定函数时,绑定函数会以创建它时传入bind方法的第一个参数作为this,传入bind方法的第二个以及以后的参数加上绑定函数运行时本身的参数按照顺序作为原函数的参数来调用原函数.
+
+
+var Button = function(content){
+
+	this.content = content;
+}
+
+Button.prototype.click = function(){
+
+	console.log(this.content + ' clicked!');
+}
+
+var myBtn = new Button('ok');
+
+myBtn.click();
+
+var lookBtn = myBtn.click;
+
+lookBtn();
+
+var bindClick = myBtn.click.bind(myBtn);
+
+bindClick();
+
+
+var sum = function(a,b){
+
+	return a+b;
+}
+
+var add5 = sum.bind(null,5);
+
+console.log(add5(10));
+
+
+</script>
+
+</body>
+</html>

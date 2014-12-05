@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+
+//Array.prototype.some ( callbackfn [ , thisArg ] )
+//此方法和 every 相对应。
+var arr = [23,45,2,1,55,99];
+
+// callbackfn 应该是个函数，它接受三个参数并返回一个可转换为布尔值 true 和 false 的值。some 按照索引的升序，对数组里存在的每个元素调用一次 callbackfn，直到他找到一个使 callbackfn 返回 true 的元素。如果找到这样的元素，some 马上返回 true，否则，some 返回 false。callbackfn 只被实际存在的数组元素调用；它不会被缺少的数组元素调用。
+
+var arr1 = arr.some(function(a,b,c){
+
+	return a>20;
+
+})
+
+console.log(arr1);//true
+
+
+
+if (!Array.prototype.some) {
+  Array.prototype.some = function(fun /*, thisArg*/) {
+    'use strict';
+
+    if (this == null) {
+      throw new TypeError('Array.prototype.some called on null or undefined');
+    }
+
+    if (typeof fun !== 'function') {
+      throw new TypeError();
+    }
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    for (var i = 0; i < len; i++) {
+      if (i in t && fun.call(thisArg, t[i], i, t)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+
+/********************基本对象**************************/
+
+//new Object( [ value ] )
+//Object*生成器以给定的值产生一个对象封装。如果给定值是null或undefined，它生成并返回一个空对象，否则，它将返回一个与给定值对应类型的对象。
+
+//Function
+//new Function ([arg1[, arg2[, ...argN]],] functionBody)
+//使用Function构造器生成的Function对象是在函数创建时被解析的。这比你使用函数声明(function)并在你的代码中调用低效，因为使用函数语句声明的function是跟其他语句一起解析的。
+
+
+//Boolean
+//Boolean对象是一个包装了布尔值的对象.
+//new Boolean(value)
+//如果Boolean构造函数的参数不是一个布尔值,则该参数会被转换成一个布尔值.如果参数是 0, -0, null, false, NaN, undefined, 或者空字符串 (""),生成的Boolean对象的值为false. 其他任何值,包括任何对象或者字符串"false", 都会创建一个值为true的Boolean对象.
+
+
+//任何值为 undefined 或者 null的对象, 包括值为false的Boolean对象, 在条件语句中,其值都将作为true来判断.例如,下面的条件语句中,if就将对象x看作是true:
+
+
+var x = new Boolean(false);
+
+//console.log(x.toString())
+var a = x.toString();
+if(a){
+	console.log('new Boolean(false).toString()的类型：'+typeof a)
+}
+
+
+
+console.log('----------------error ----------------------');
+/**************js 里面的错误类型 ****************/
+//Error
+
+//概述
+//创建一个error对象。
+//new Error([message[, fileName[,lineNumber]]])
+
+//当代码运行时的发生错误，会创建新的Error对象，并将其抛出。
+
+//除了通用的Error构造函数外，JavaScript还有6个其他类型的错误构造函数。用于处理客户端的各种异常，如: Exception Handling Statements。
+
+/**
+
+EvalError
+创建一个error实例，表示错误的原因：与eval()有关。
+RangeError
+创建一个error实例，表示错误的原因：数值变量或参数超出其有效的范围
+ReferenceError
+创建一个error实例，表示错误的原因：无效引用
+//demo console.log(a);
+SyntaxError
+创建一个error实例，表示错误的原因：语法错误
+//demo console.log(1.a); console.log(eval('));
+TypeError
+创建一个error实例，表示错误的原因：变量或参数不属于有效类型。
+//var a='str'; a.sort();
+URIError
+创建一个error实例，表示错误的原因：给 encodeURI() 或 decodeURI() 传递的参数无效
+
+*/
+
+//自定义Error的类型
+//利用Error对象，可以在自己的项目中扩展一个新的Error类型。
+
+function myError(message){
+
+	this.name = 'myError';
+	this.message=message || "Default Message";
+
+
+}
+
+myError.prototype = new Error();
+
+myError.prototype.constractor = myError;
+
+try{
+
+	throw new myError('test message');
+}
+catch(e){
+
+	console.log(e.name);
+	console.log(e.message);
+}
+
+//抛出一个通用 error
+try{
+
+	throw new Error('Whoops');
+
+}catch(e){
+
+	console.log(e.name+": "+e.message);//Error: Whoops
+
+}
+
+//处理一个特定 error
+
+try{
+
+	foo.bar()
+
+}catch(e){
+
+	if(e instanceof EvalError){
+
+		console.log(e.name+": "+e.message);
+	}else if(e instanceof RangeError){
+
+		console.log(e.name+": "+e.message);
+	}else if(e instanceof ReferenceError){
+
+		console.log('ReferenceError')
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

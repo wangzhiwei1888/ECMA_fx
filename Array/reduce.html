@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+//Array.prototype.reduce ( callbackfn [ , initialValue ] )
+// callbackfn 应该是个函数，它需要四个参数。reduce 按照索引的升序，对数组里存在的每个元素 , 将 callbackfn 作为回调函数调用一次。
+
+// 调用 callbackfn 时将传入四个参数：previousValue（initialValue 的值或上次调用 callbackfn 的返回值），currentValue（当前元素值），currentIndex，和遍历的对象。第一次调用回调函数时，previousValue 和 currentValue 的取值可以是下面两种情况之一。如果为 reduce 调用提供了一个 initialValue，则 previousValue 将等于 initialValue 并且 currentValue 将等于数组的首个元素值。如果没提供 initialValue，则 previousValue 将等于数组的首个元素值并且 currentValue 将等于数组的第二个元素值。如果数组里没有元素并且没有提供 initialValue，则抛出一个 TypeError 异常。
+
+
+
+//对数组中的所有元素调用指定的回调函数。 该回调函数的返回值为累积结果，并且此返回值在下一次调用该回调函数时作为参数提供。
+
+
+//下面的示例将数组值连接成字符串，各个值用“::”分隔开。 由于未向 reduce 方法提供初始值，第一次调用回调函数时会将“12”作为 previousValue 参数并将“11”作为 currentValue 参数
+
+var arr = [12,11,44,51,99,123];
+var result = arr.reduce(function(a,b,c,d){
+
+	console.log(a);
+	console.log(b);
+	console.log(c);
+	return a+"::"+b;
+
+})
+console.log(result);
+/*
+reduce.html:26 12
+reduce.html:27 11
+reduce.html:28 1
+reduce.html:26 12::11
+reduce.html:27 44
+reduce.html:28 2
+reduce.html:26 12::11::44
+reduce.html:27 51
+reduce.html:28 3
+reduce.html:26 12::11::44::51
+reduce.html:27 99
+reduce.html:28 4
+reduce.html:26 12::11::44::51::99
+reduce.html:27 123
+reduce.html:28 5
+reduce.html:32 12::11::44::51::99::123
+*/
+
+
+console.log('------------------------------------------------------------------------')
+
+
+
+
+var numbers = [10.3,10.6,11.1,11.9];
+
+
+var result1 = numbers.reduce(function(a,b){
+
+	console.log(a);
+	console.log(b);
+	console.log('---------------');
+
+	return a + Math.round(b);
+
+},0)
+
+console.log(result1);
+
+
+console.log('------------------------------------------------------------------------')
+
+var digits = [4,1,2,5];
+
+
+var result2 = digits.reduce(function(a,b,c,d){
+
+	var exponent = (d.length-1)-c;
+
+	var value = b * Math.pow(10,exponent);
+	console.log(exponent);
+	console.log(value);
+	console.log('-------------------------');
+	return a+ value;
+
+},0)
+
+console.log(result2);//4125
+
+
+console.log('------------------------------------------------------------------------')
+
+
+var nums = [20, 1, -5, 6, 50, 3];
+
+var rArray = nums.reduce(function(a,b){
+
+	var nextArray;
+
+	if(b>=1 && b<=10){
+
+		nextArray = a.concat(b);
+	}
+	else{
+		nextArray = a;
+	}
+	return nextArray;
+
+},[]);
+
+console.log(rArray);
+
+
+if (!Array.prototype.reduce) {
+  Array.prototype.reduce = function(callback /*, initialValue*/) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('Array.prototype.reduce called on null or undefined');
+    }
+    if (typeof callback !== 'function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+    var t = Object(this), len = t.length >>> 0, k = 0, value;
+    if (arguments.length == 2) {
+      value = arguments[1];
+    } else {
+      while (k < len && ! k in t) {
+        k++; 
+      }
+      if (k >= len) {
+        throw new TypeError('Reduce of empty array with no initial value');
+      }
+      value = t[k++];
+    }
+    for (; k < len; k++) {
+      if (k in t) {
+        value = callback(value, t[k], k, t);
+      }
+    }
+    return value;
+  };
+}
+
+
+
+//参考：http://msdn.microsoft.com/zh-cn/library/ie/ff679975(v=vs.94).aspx
+
+</script>
+</body>
+</html>

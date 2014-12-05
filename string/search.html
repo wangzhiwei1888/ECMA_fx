@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript">
+
+//search方法返回与正则表达式查找内容匹配的第一个字符串的位置。
+
+var str="sjflsjdflsdjffffflslkdfsssewer";
+
+var reg = /ffff/i;
+
+var index1 = str.search(reg);
+
+console.log(index1);//12
+
+
+var reg1 = /ffffk/i;
+
+var index2 = str.search(reg1);
+
+console.log(index2);//-1
+
+
+
+var index3 = str.search("f");
+
+console.log(index3);//2
+
+//因为是匹配第一个字符串的位置。所以正则不用全局匹配。
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var divide = function(x, y) {
+  if (y === 0) {
+    throw new Error('divide by zero');
+  }
+  return x / y;
+};
+
+try {
+  console.log(divide(10, 0)); 
+}
+catch (error) {
+  console.log(error.name);//Error
+  console.log(error.message);//divide by zero
+}
+
+
+
+try {
+  foo; 
+}
+catch (error) {
+  console.log(error.message);//foo is not defined
+  console.log(error.name);//ReferenceError
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

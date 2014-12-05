@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+	//正则字符串处理常用方法：
+	//test ：判断真假
+	var str = '121212wa';
+
+	var reg = /\D/;
+
+	if(reg.test(str)){
+
+		console.log("不全是数字");
+	}
+	else{
+		console.log("全是数字");
+	}
+
+	//任意字符
+	var reg1 = /[abc]/;
+	console.log(reg1.test(str));
+
+	//范围
+	var reg2 = /[a-z]/;
+	console.log(reg2.test(str));
+
+	//排除
+	var reg3 = /[^a]/g;
+	
+	var str2 = str.replace(reg3,'_');
+	console.log(str2);
+
+	//以a开头的字符
+	var reg3_ = /^a/;
+	//test 的时候只匹配str的第一个字符。加不加全局匹配都一样
+	var str3 = 'a';
+
+	console.log('-----------------');
+	console.log(reg3_.test(str3));//true
+
+
+	var str4 = 'sdfa';
+	console.log(reg3_.test(str4));//false
+
+	//判断字符串是否一a字符结尾
+	var reg4 = /[^a]$/;
+	console.log(reg4.test(str3));//false
+	console.log(reg4.test(str4));//false
+
+
+	//判断字符串里面有没有字符 a
+	var reg5 = /a/;
+	console.log(reg5.test(str4));//true
+
+
+	//\1 : 重复的第一个子项
+	//\2 : 重复的第二个子项
+
+	var str5 = "abca";
+
+	var reg6 = /(a)(b)(c)\1/;
+
+	console.log(reg6.test(str5));//true
+	console.log(str5.match(reg6));//["abca", "a", "b", "c", index: 0, input: "abca"]
+
+	//应该是父项匹配成功后才会去匹配子项。
+	var reg7 = /(a)(b)(c)\2/;
+	console.log(reg7.test(str5));//false
+	console.log(str5.match(reg7));//null
+
+	var str6 = "uopiabcb";
+	var reg8 = /(a)(b)(c)\2/;
+
+	console.log(reg8.test(str6));//true
+	console.log(str6.match(reg8));//["abcb", "a", "b", "c", index: 4, input: "abcaabcb"]
+
+
+	var reg9 = /a{6}/
+	var str9 = 'weraaaaaaii';
+	console.log(reg9.test(str9));//true
+
+
+	var reg10 = /ab?/g
+
+	var str10 = "auioabcajkljab";
+
+	console.log(reg10.test(str10));//true
+	console.log(str10.match(reg10));//["a", "ab", "a", "ab"]
+	
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+//Array.prototype.every ( callbackfn [ , thisArg ] )
+// callbackfn 应该是个函数，它接受三个参数并返回一个可转换为布尔值 true 和 false 的值。every 按照索引的升序，对数组里存在的每个元素调用一次 callbackfn，直到他找到一个使 callbackfn 返回 false 的元素。如果找到这样的元素，every 马上返回 false，否则如果对所有元素 callbackfn 都返回 true，every 将返回 true。callbackfn 只被数组里实际存在的元素调用；它不会被缺少的元素调用。
+
+//调用 callbackfn 时将传入三个参数：元素的值，元素的索引，和遍历的对象
+
+var arr = [12,34,22,77];
+
+var arr1 = arr.every(function(a,b,c){
+
+	console.log(a)
+	console.log("index:"+b)
+	console.log("遍历对象"+c)
+
+	return a>2;
+})
+console.log(arr);
+console.log(arr1);
+
+/*
+结果：
+12
+index:0
+遍历对象12,34,22,77
+34
+index:1
+遍历对象12,34,22,77
+22
+index:2
+遍历对象12,34,22,77
+77
+index:3
+遍历对象12,34,22,77
+
+
+[12, 34, 22, 77]
+true
+
+*/
+
+console.log("------------------------------");
+
+var arr2 = arr.every(function(a,b,c){
+
+	console.log(a)
+	console.log("index:"+b)
+	console.log("遍历对象"+c)
+
+	return a>12;
+})
+console.log(arr);
+console.log(arr2);
+
+/*
+结果：
+12
+index:0
+遍历对象12,34,22,77
+[12, 34, 22, 77]
+false
+
+*/
+
+
+console.log("------------------------------");
+// every 处理的元素范围是在首次调用 callbackfn 之前设定的。在 every 调用开始后追加到数组里的元素们不会被 callbackfn 访问。如果更改以存在数组元素，every 访问这些元素时的值会传给 callbackfn；在 every 调用开始后删除的和之前被访问过的元素们是不访问的。every 的行为就像数学量词“所有（for all）”。
+
+//特别的，对一个空数组，它返回 true。
+var arr3 = [];
+
+var arr4 = arr3.every(function(a,b,c){
+	console.log(a)
+	return a>10
+})
+
+console.log(arr4);//true
+
+
+console.log('----------------------------------------------------------------')
+var numbers = [2,4,5,6,8];
+
+function CheckIfEven(value,index,ar){
+
+	console.log(value + " ");
+
+	if(value%2==0){
+		
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+if(numbers.every(CheckIfEven))
+{
+	console.log('all are even');
+}else{
+	console.log('some are not even');
+}
+
+
+
+console.log('----------------------------------------------------------------')
+
+var nums = [10,15,19];
+
+var checkNumericRange = function(value){
+
+	if(typeof value !== 'number'){
+
+		return false;
+	}
+	else{
+
+		if(value >= this.min && value <= this.max){
+
+			return true;
+		}
+	}
+
+}
+
+var obj = {min:10,max:20};
+
+var bool = nums.every(checkNumericRange,obj)
+
+if(bool){
+
+	console.log("All are within range.");
+}
+else{
+	console.log("Some are not within range.");
+}
+
+
+
+if (!Array.prototype.every) {
+  Array.prototype.every = function(callbackfn, thisArg) {
+    'use strict';
+    var T, k;
+
+    if (this == null) {
+      throw new TypeError('this is null or not defined');
+    }
+
+    // 1. Let O be the result of calling ToObject passing the this 
+    //    value as the argument.
+    var O = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get internal method
+    //    of O with the argument "length".
+    // 3. Let len be ToUint32(lenValue).
+    var len = O.length >>> 0;
+
+    // 4. If IsCallable(callbackfn) is false, throw a TypeError exception.
+    if (typeof callbackfn !== 'function') {
+      throw new TypeError();
+    }
+
+    // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+    if (arguments.length > 1) {
+      T = thisArg;
+    }
+
+    // 6. Let k be 0.
+    k = 0;
+
+    // 7. Repeat, while k < len
+    while (k < len) {
+
+      var kValue;
+
+      // a. Let Pk be ToString(k).
+      //   This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the HasProperty internal 
+      //    method of O with argument Pk.
+      //   This step can be combined with c
+      // c. If kPresent is true, then
+      if (k in O) {
+
+        // i. Let kValue be the result of calling the Get internal method
+        //    of O with argument Pk.
+        kValue = O[k];
+
+        // ii. Let testResult be the result of calling the Call internal method
+        //     of callbackfn with T as the this value and argument list 
+        //     containing kValue, k, and O.
+        var testResult = callbackfn.call(T, kValue, k, O);
+
+        // iii. If ToBoolean(testResult) is false, return false.
+        if (!testResult) {
+          return false;
+        }
+      }
+      k++;
+    }
+    return true;
+  };
+}
+
+
+</script>
+
+</body>
+</html>

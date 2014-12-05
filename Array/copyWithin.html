@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+//arr.copyWithin(target, start[, end = this.length])
+//ECMAScript 6
+//The copyWithin() method copies the sequence of array elements within the array to the position starting at target. The copy is taken from the index positions of the second and third arguments start and end. The end argument is optional and defaults to the length of the array. This method has the same algorithm as
+
+[1, 2, 3, 4, 5].copyWithin(0, 3);
+// [4, 5, 3, 4, 5]
+
+[1, 2, 3, 4, 5].copyWithin(0, 3, 4);
+// [4, 2, 3, 4, 5]
+
+[1, 2, 3, 4, 5].copyWithin(0, -2, -1);
+// [4, 2, 3, 4, 5]
+
+[].copyWithin.call({length: 5, 3: 1}, 0, 3);
+// {0: 1, 3: 1, length: 5}
+
+
+</script>
+</body>
+</html>

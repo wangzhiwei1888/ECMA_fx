@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript">
+
+
+//字符串升序排列
+var str = 'abcdefghisldjfklsdjf';
+var str1 = str.split("").sort()
+console.log(str1.join(''));
+
+
+var str2 = '1,23,4,1,2,5,1,2,3,5,9';
+
+var arr = str2.split(',');
+
+arr.sort(function(a,b){
+
+	//return a-b;
+	return b-a;
+})
+
+console.log(arr);
+
+
+
+	
+
+</script>
+
+
+</body>
+</html>

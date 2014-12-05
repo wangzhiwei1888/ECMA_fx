@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var str = "abaaadkjafkaad";
+
+/* 把a换成- */
+
+var reg = /a/g;
+var str1 = str.replace(reg,'-');
+console.log(str1);	//-b---dkj-fk--d
+
+/************************************************************************/
+
+
+var reg = /a+/g;
+var str1 = str.replace(reg,'-');
+console.log(str1);	//-b-dkj-fk-d
+
+/************************************************************************/
+
+
+var str2 = '中国人民英雄纪念馆';
+
+var reg=/中国|纪念/g;
+var str3 = str2.replace(reg,function($0){
+
+	var str = $0;
+	console.log(str);//中国 //纪念
+	var result = "";
+
+	for(var i=0,len=str.length;i<len;i++){
+
+		result +="*";
+	}
+
+	return result;
+})
+
+console.log(str3);//**人民英雄**馆
+
+
+/************************************************************************/
+
+
+var str4 = "2014-03-16";
+
+var reg1 = /(\d+)(-)/g;
+
+var str5 = str4.replace(reg1,function($0,$1,$2){
+
+
+	//console.log($0)
+	//console.log($1)
+	//console.log($2)
+	//console.log('----------');
+
+	return $1+'.';
+
+})
+
+console.log(str5);//2014.03.16
+
+
+var str6= str4.replace(/-/g,'.');
+console.log(str6);//2014.03.16
+
+
+/************************************************************************/
+
+
+//html标签过滤
+
+var str7 = "<h3>sldkjf</h3><span class='ko'>iii</span>";
+
+var reg2 = /<[^>]+>/g;
+
+var str8 = str7.replace(reg2,"");
+
+console.log(str8);//sldkjfiii
+
+
+/************************************************************************/
+
+
+console.log('-------------');
+//查找重复项最多的字符和此字符的个数
+
+var str8 = "sdlkjflskjdfljsdfjsldkfjffffffffsdfsdlskjdflsjdfl";
+
+var arr8 = str8.split("");
+
+var str8_ = arr8.sort().join('');
+console.log(str8_);
+
+var reg8 = /(.)\1+/g;
+
+var len = 0;
+var value = '';
+str8_.replace(reg8,function($0,$1){
+
+	//console.log($0);
+	//console.log($1);
+
+	if(len<$0.length){
+
+		len = $0.length;
+		value = $1;
+	}
+
+})
+
+console.log(value + '-----' + len);
+
+
+/************************************************************************/
+
+//字符串去重
+
+var str9 = "aaaaabbbbbccccdddeeef";
+
+var reg9 = /(.)\1+/g;
+
+var str9_ = str9.replace(reg9,function($0,$1){
+	
+	return $1;
+
+})
+
+var str9_1 = str9.replace(reg9,"$1");
+
+console.log(str9_);
+
+console.log(str9_1);
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

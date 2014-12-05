@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var arr = new Array(5);
+
+console.log(arr.length)//5
+
+console.log(arr[0]);//undefined
+
+
+console.log(Array.isArray(arr));//true
+
+var arr1 = [1,2,3,45];
+
+//数组原型对象不包含它自身的 valueOf 属性；然而，它从标准内置 Object 原型对象继承 valueOf 属性。
+console.log(arr1.valueOf());//[1, 2, 3, 45]
+console.log(arr1 === arr1.valueOf());//true
+
+
+var str = 'sdfljsdlfjsdlf';
+
+console.log(str.valueOf());
+
+
+console.log(Array.prototype.constructor);
+
+console.log(arr1.toString());
+
+var json ={a:1,b:2};
+
+console.log(json.toString());
+
+
+
+</script>
+
+</body>
+</html>

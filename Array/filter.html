@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript">
+
+//Array.prototype.filter ( callbackfn [ , thisArg ] )	
+//callbackfn 应该是个函数，它接受三个参数并返回一个可转换为布尔值 true 和 false 的值。filter 按照索引的升序，对数组里存在的每个元素调用一次 callbackfn，并用使 callbackfn 返回 true 的所有值构造一个新数组。callbackfn 只被实际存在的数组元素调用；它不会被缺少的数组元素调用。
+
+var arr = [1,212,112,44,11,1123,999];
+
+var arr1 = arr.filter(function(a,b,c){
+
+	return a>20;
+	//console.log(a);
+
+})
+
+console.log(arr1);
+
+
+//适用于筛选
+
+
+var filterNames = Object.getOwnPropertyNames(window).filter(function(value){
+
+	var firstChar = value.substr(0,3);
+
+	if(firstChar.toLowerCase() == "css"){
+
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+})
+
+console.log(filterNames);
+
+//["CSSViewportRule", "CSSValueList", "CSSValue", "CSSUnknownRule", "CSSStyleSheet", "CSSStyleRule", "CSSStyleDeclaration", "CSSRuleList", "CSSRule", "CSSPrimitiveValue", "CSSPageRule", "CSSMediaRule", "CSSKeyframesRule", "CSSKeyframeRule", "CSSImportRule", "CSSFontFaceRule", "CSSCharsetRule", "CSS"]
+
+
+//下面的示例阐释 thisArg 参数的用法，该参数指定对其引用 this 关键字的对象。
+
+
+var numbers = [6, 12, "15", 16, "the", -12];
+
+var obj = {min:10,max:20};
+
+var result = numbers.filter(function(value){
+
+	console.log(this);//Object {min: 10, max: 20}	打印六次
+
+	if(typeof value !== 'number'){
+
+		return false;
+	}
+	else{
+
+		return value >= this.min && value <= this.max;
+	}
+
+},obj)
+
+
+console.log(result);//[12,16]
+
+
+//filter 方法可应用于字符串而不是数组。 下面的示例演示如何执行此操作。
+//取句子中每个单词的第一个字母。
+var sentence = "The quick brown fox jumps over the lazy dog.";
+var subset = [].filter.call(sentence,function(value,index,ar){
+
+	if(index ==0){
+
+		return true;
+	}
+	else{
+		return ar[index-1] === " ";
+	}
+})
+
+console.log(subset);//["T", "q", "b", "f", "j", "o", "t", "l", "d"]
+
+
+
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(fun/*, thisArg*/) {
+    'use strict';
+
+    if (this === void 0 || this === null) {
+      throw new TypeError();
+    }
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+    if (typeof fun !== 'function') {
+      throw new TypeError();
+    }
+
+    var res = [];
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    for (var i = 0; i < len; i++) {
+      if (i in t) {
+        var val = t[i];
+
+        // NOTE: Technically this should Object.defineProperty at
+        //       the next index, as push can be affected by
+        //       properties on Object.prototype and Array.prototype.
+        //       But that method's new, and collisions should be
+        //       rare, so use the more-compatible alternative.
+        if (fun.call(thisArg, val, i, t)) {
+          res.push(val);
+        }
+      }
+    }
+
+    return res;
+  };
+}
+
+</script>
+
+
+</body>
+</html>

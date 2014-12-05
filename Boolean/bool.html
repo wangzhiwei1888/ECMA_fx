@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+console.log(Boolean(''));//false
+console.log(Boolean('0'));//true
+console.log(Boolean(0));//false
+console.log(Boolean(1));//true
+console.log(Boolean([]));//true
+console.log(Boolean(undefined));//false
+console.log(!!undefined);//false
+
+var literal = true;
+var boxed = new Boolean(true);
+
+console.log(literal === true);	//true
+console.log(boxed === true);	//false
+console.log(boxed.valueOf() === true);	//true
+
+
+// Literals cannot hold other properties but boxes can
+literal.foo = 'bar';
+boxed.foo = 'bar';
+console.log(literal.foo); //undefined
+console.log(boxed.foo);	//bar
+
+
+console.log(true.toString()); //"true"
+console.log(false.toString()); //"false"
+
+
+
+</script>
+</body>
+</html>

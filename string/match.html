@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var str = "cat,bat,mat,kat,oat";
+
+
+//match方法返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null。返回数组还有index属性和input属性，分别表示匹配字符串开始的位置（从0开始）和原始字符串。
+
+var arr = str.match("ca");
+var arr1 = str.match("atr");
+var arr2 = str.match("at");
+
+console.log(arr);//["ca", index: 0, input: "cat,bat,mat,kat,oat"]
+console.log(arr.index); //0
+
+console.log(arr1);//null
+
+console.log(arr2.index);//1
+
+/*******************************************************************/
+
+//如果是全局匹配，生成的数组不附带index input
+var arr3 = str.match(/at/g);
+
+console.log(arr3);// ["at", "at", "at", "at", "at"]
+
+
+//匹配数字
+var str2 = "sdjf12fsdf1dskfj12312Kkk888";
+
+var arr4 = str2.match(/\d+/g);	
+
+console.log(arr4);	//["12", "1", "12312", "888"]
+
+/*******************************************************************/
+
+//[abc,a,b,c](当match不加g的时候才可以获取到子项的集合)
+var str = 'abc';
+var re = /(A)(b)(c)/i;
+console.log( str.match(re) );  //["abc", "a", "b", "c", index: 0, input: "abc"]
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var elements = ["abc","def",123,456];
+
+var appendCurrent = function(pv,cv){
+
+	console.log(pv);
+	console.log(cv);
+
+	return pv+"::"+cv;
+}
+
+var result = elements.reduceRight(appendCurrent);
+
+console.log(result);
+
+
+/*
+reduceRight.html:15 456
+reduceRight.html:16 123
+reduceRight.html:15 456::123
+reduceRight.html:16 def
+reduceRight.html:15 456::123::def
+reduceRight.html:16 abc
+reduceRight.html:23 456::123::def::abc
+*/
+
+
+console.log('----------------------------------------------');
+
+var numbers = [3,4,5];
+
+var sumOfSquares = numbers.reduceRight(function(pv,cv,index,ar){
+
+	var nextValue = pv + (cv*cv);
+
+	return nextValue;
+
+},0);
+
+
+console.log(sumOfSquares);//50
+
+console.log('----------------------------------------------');
+
+var nums = [20, 1, -5, 6, 50, 3];
+
+var Process2 = function(pv,cv){
+
+	var nextArray;
+
+	if(cv>=1 && cv<=10){
+		nextArray = pv.concat(cv);
+	}
+	else{
+
+		nextArray = pv;
+	}
+
+	return nextArray;
+}
+
+var resultArray = nums.reduceRight(Process2,[])
+
+
+console.log(resultArray)//[3, 6, 1]
+
+console.log('----------------------------------------------');
+
+var word = 'retupmoc';
+
+var appendToArray = function(pv,cv){
+
+	return pv + cv;
+}
+
+var resultStr = [].reduceRight.call(word,appendToArray,'The ');
+
+console.log(resultStr);//The computer
+
+
+if ('function' !== typeof Array.prototype.reduceRight) {
+  Array.prototype.reduceRight = function(callback /*, initialValue*/) {
+    'use strict';
+    if (null === this || 'undefined' === typeof this) {
+      throw new TypeError('Array.prototype.reduce called on null or undefined' );
+    }
+    if ('function' !== typeof callback) {
+      throw new TypeError(callback + ' is not a function');
+    }
+    var t = Object(this), len = t.length >>> 0, k = len - 1, value;
+    if (arguments.length >= 2) {
+      value = arguments[1];
+    } else {
+      while (k >= 0 && !k in t) {
+        k--;
+      }
+      if (k < 0) {
+        throw new TypeError('Reduce of empty array with no initial value');
+      }
+      value = t[k--];
+    }
+    for (; k >= 0; k--) {
+      if (k in t) {
+        value = callback(value, t[k], k, t);
+      }
+    }
+    return value;
+  };
+}
+
+</script>
+</body>
+</html>

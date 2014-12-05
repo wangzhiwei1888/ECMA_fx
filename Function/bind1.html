@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var x = 9;
+var module = {
+
+	x:81,
+	getX:function (){
+
+		return this.x;
+	}
+}	
+
+console.log(module.getX());//81
+
+var globalX = module.getX;
+
+console.log(globalX());//9
+
+
+var bindX = module.getX.bind(module);
+
+console.log(bindX())//81
+
+
+console.log('-----------------------------------------------------------');
+
+
+function list(){
+
+	return Array.prototype.slice.call(arguments);
+}
+
+var list = list(1,2,3);
+
+//console.log(list);
+
+
+</script>
+
+</body>
+</html>

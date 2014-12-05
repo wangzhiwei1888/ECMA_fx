@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<script type="text/javascript">
+
+
+
+var str = 'abcdef';
+
+//alert(str.charAt(0));
+
+//首字母大写
+//charAt方法返回指定索引位置处的字符。如果超出有效范围的索引值返回空字符串。
+var a = str.charAt(0).toUpperCase();
+
+var str1 = str.replace(str.charAt(0),a);
+
+alert(str1);
+
+
+//var b = str.charAt(-2);
+
+
+//alert(b);
+
+//charCodeAt方法返回一个整数，代表指定位置字符的Unicode编码。
+var str2 = str.charCodeAt(5);
+
+alert(str2);
+
+//fromCharCode方法从一些Unicode字符串中返回一个字符串
+alert(String.fromCharCode(102));
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

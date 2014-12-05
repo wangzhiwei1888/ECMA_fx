@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+//exec
+//exec() 方法为指定的一段字符串执行搜索匹配操作。它的返回值是一个数组或者 null。
+//如果你仅仅是为了知道是否匹配，可以使用 RegExp.test() 方法，或者 String.search() 方法。
+
+
+//regexObj.exec(str)
+/*
+
+返回值
+
+如果成功匹配，exec 方法返回一个数组，并且更新正则表达式对象的属性。返回的数组包括匹配的字符串作为第一个元素，紧接着一个元素对应一个成功匹配被捕获的字符串的捕获括号（capturing parenthesis）。（one item for each capturing parenthesis that matched containing the text that was captured.）
+
+如果匹配失败，exec 方法将返回 null。
+
+
+*/
+
+var re = /d(b+)(d)/ig;
+var result = re.exec("cdbBdbbsdbbdz");//["dbBd", "bB", "d", index: 1, input: "cdbBdbbsdbbdz"]
+
+console.log(result);
+
+
+
+var myRe = /ab*/g;
+
+var str = 'abbcdefabha';
+
+var myArray;
+
+while((myArray = myRe.exec(str)) !== null){
+
+	var msg = "Found: "+ myArray[0]+". ";
+	msg +="Next match starts at: "+myRe.lastIndex;
+
+	//myRe.lastIndex = 10;//会死循环
+	console.log(msg);
+
+}
+
+
+var matches = /(hello \S+)/.exec('This is a hello world');
+
+console.log(matches);//["hello world", "hello world", index: 10, input: "This is a hello world"]
+//因为他会先全局匹配，然后再去匹配子项，所以会出现两个
+
+</script>
+
+</body>
+</html>

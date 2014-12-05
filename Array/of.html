@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+//ECMAScript 6	
+//Array.of(element0[, element1[, ...[, elementN]]])
+
+
+if(!Array.of){
+
+	Array.of = function(){
+
+		return Array.prototype.slice.call(arguments);
+	}
+}
+
+
+console.log(Array.of(1,2,4));
+
+
+
+
+</script>
+</body>
+</html>

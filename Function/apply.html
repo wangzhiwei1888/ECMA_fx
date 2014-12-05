@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+//apply
+
+//apply() 方法可以在使用一个指定的 this 值和一个参数数组（或类数组对象）的前提下调用某个函数或方法。
+//注:该方法的作用和 call() 方法类似，只有一个区别就是，call()方法接受的是若干个参数的列表，而apply()方法接受的是一个包含多个参数的数组（或类数组对象）。
+
+//fun.apply(thisArg[, argsArray])
+//thisArg 在 fun 函数运行时指定的 this 值。需要注意的是，指定的 this 值并不一定是该函数执行时真正的 this 值，如果这个函数处于非严格模式下，则指定为 null 或 undefined 时会自动指向全局对象（浏览器中就是window对象），同时值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的自动包装对象。
+
+//argsArray 一个数组或者类数组对象，其中的数组元素将作为单独的参数传给 fun 函数。如果该参数的值为null 或 undefined，则表示不需要传入任何参数。
+//根据 ES5 规范，argsArray 参数可以是一个数组或者任意类数组对象
+
+
+/*
+在调用一个存在的函数时，你可以为其指定一个 this 对象。 this 指当前对象，也就是正在调用这个函数的对象。 使用 apply， 你可以只写一次这个方法然后在另一个对象中继承它，而不用在新对象中重复写该方法。
+
+apply 与 call() 非常相似，不同在于所提供的参数类型。apply 使用参数数组而不是一组参数列表（原文：a named set of parameters）。使用 apply, 可以使用数组字面量（array literal）形式，例如，fun.apply(this, ['eat', 'bananas']),，或者数组对象形式， 例如， fun.apply(this, new Array('eat', 'bananas'))。
+
+你也可以使用 arguments  对象作为 argsArray 参数。 arguments 是一个函数的局部变量。 It can be used for all unspecified arguments of the called object. Thus, you do not have to know the arguments of the called object when you use the apply method. You can use arguments to pass all the arguments to the called object. The called object is then responsible for handling the arguments.
+
+从 ECMAScript 第5版开始，可以使用任何种类的类数组对象，就是说只要有一个 length 属性和[0...length) 范围的整数属性。例如现在可以使用 NodeList 或一个自己定义的类似 {'length': 2, '0': 'eat', '1': 'bananas'} 形式的对象。
+*/
+
+/*
+var whatsThis = function() { console.log(this); }
+whatsThis.apply('hello');//String {0: "h", 1: "e", 2: "l", 3: "l", 4: "o", length: 5, [[PrimitiveValue]]: "hello"}
+
+
+var numbers = [3, 20, 1, 45];
+console.log(Math.max.apply(undefined, numbers));//45
+console.log(Math.max.apply(null, numbers));//45
+*/
+
+
+Function.prototype.construct = function (aArgs) {
+
+	console.log(this);
+    var fConstructor = this, 
+    	fNewConstr = function () { fConstructor.apply(this, aArgs); };
+
+    	fNewConstr.prototype = fConstructor.prototype;
+    	
+    	return new fNewConstr();
+};
+
+function MyConstructor () {
+    for (var nProp = 0; nProp < arguments.length; nProp++) {
+        this["property" + nProp] = arguments[nProp];
+    }
+}
+
+var myArray = [4, "Hello world!", false];
+var myInstance = MyConstructor.construct(myArray);
+
+alert(myInstance.property1); // alerts "Hello world!"
+alert(myInstance instanceof MyConstructor); // alerts "true"
+alert(myInstance.constructor); // alerts "MyConstructor"
+
+
+</script>
+
+
+</body>
+</html>
